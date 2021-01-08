@@ -113,23 +113,22 @@
         </div>
     </div>
     <div class="btt-button shadow-sm rounded-0 border border-black">
-        <a href="#" class="btt-link d-flex h-100">
+        <a class="btt-link d-flex h-100">
             <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-        </a>
+        </a>	
     </div>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
-        $(".btt-link").click(function(e){
-            window.scrollTo(0,0)
-        })
-    </script>
-
-
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+    
     <script type="text/javascript">
-        $('#sort-selector').change(function(){
+        $('#sort-selector').change(function() {
             var selector = $(this);
             var currentUrl = new URL(window.location);
 
@@ -142,11 +141,11 @@
                 currentUrl.searchParams.set("direction", direction);
 
                 window.location.replace(currentUrl);
-            } else{
+            } else {
                 currentUrl.searchParams.delete("sort");
                 currentUrl.searchParams.delete("direction");
 
-                window.location.relace(currentUrl)
+                window.location.replace(currentUrl);
             }
         })
     </script>
