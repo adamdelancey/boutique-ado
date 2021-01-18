@@ -5,9 +5,10 @@ from django.dispatch import receiver
 
 from django_countries.fields import CountryField
 
+
 class UserProfile(models.Model):
     """
-    a user profile for maintaining defaut
+    A user profile model for maintaining default
     delivery information and order history
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -22,6 +23,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
@@ -29,6 +31,5 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     if created:
         UserProfile.objects.create(user=instance)
-    # existing users: just save the profile
+    # Existing users: just save the profile
     instance.userprofile.save()
-
