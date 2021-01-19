@@ -18,10 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u$+#-dr9i*ifxdm7u(j-selxq3nq^61@3+17i#uz2f*)v#8)_6'
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['adl-boutique-ado.herokuapp.com', 'localhost']
 
@@ -118,10 +118,12 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
 
 if 'DATABASE_URL' in os.environ:
+    print("Postgres DB is being used")
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 else:
+    print("SQLite3 DB is being used")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
